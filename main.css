@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: .5rem;
+    font-size: 1.2rem;
+    width: 100px;
+    margin: 20px 0px;
+}
+
+.green {
+    background-color: rgb(61, 207, 68);
+}
+
+.red {
+    background-color: red;
+}

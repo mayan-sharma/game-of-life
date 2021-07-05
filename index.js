@@ -8,7 +8,7 @@ const rows = 30;
 const cols = 30;
 const cellHeight = 20;
 const cellWidth = 20;
-const grid = [];
+let grid = [];
 let animationRef;
 let isAnimating = false;
 
@@ -43,12 +43,12 @@ const drawGrid = (grid) => {
     })    
 }
 
-const simulation = (grid) => {
+const simulation = (inputGrid) => {
     if (isAnimating) {
-        drawGrid(grid);
+        drawGrid(inputGrid);
     
         const dirs = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
-        const newGrid = grid.map((arr) => arr.slice());
+        const newGrid = inputGrid.map((arr) => arr.slice());
     
         for(let i=0; i<rows; i++) {
             for(let j=0; j<cols; j++) {
@@ -57,15 +57,17 @@ const simulation = (grid) => {
                 for([x, y] of dirs) {
                     const [newI, newJ] = [i+x, j+y];
     
-                    if (newI >= 0 && newI < rows && newJ >= 0 && newJ < cols && grid[newI][newJ] === 1) {
+                    if (newI >= 0 && newI < rows && newJ >= 0 && newJ < cols && inputGrid[newI][newJ] === 1) {
                         neighbors++;
                     }
                 }
                 
                 if (neighbors < 2 || neighbors > 3) newGrid[i][j] = 0;
-                else if (grid[i][j] === 0 && neighbors === 3) newGrid[i][j] = 1;  
+                else if (inputGrid[i][j] === 0 && neighbors === 3) newGrid[i][j] = 1;  
             }
         }
+
+        grid = inputGrid;
         
         setTimeout(() => {
             animationRef = window.requestAnimationFrame(() => simulation(newGrid));
