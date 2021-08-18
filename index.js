@@ -5,12 +5,14 @@ const gridDOM = document.getElementById('grid');
 
 // State
 const rows = 30;
-const cols = 30;
+let cols = 30;
 const cellHeight = 20;
 const cellWidth = 20;
 let grid = [];
 let animationRef;
 let isAnimating = false;
+
+if (screen.width <= 700) cols = 20;
 
 // creates grid with all 0s
 for(let i=0; i<rows; i++) {
